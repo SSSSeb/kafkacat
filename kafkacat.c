@@ -922,7 +922,7 @@ static void metadata_list (void) {
 
         /* Fetch metadata */
         err = rd_kafka_metadata(conf.rk, conf.rkt ? 0 : 1, conf.rkt,
-                                &metadata, 5000);
+                                &metadata, 30000);
         if (err != RD_KAFKA_RESP_ERR_NO_ERROR)
                 KC_FATAL("Failed to acquire metadata: %s", rd_kafka_err2str(err));
 
@@ -2065,7 +2065,7 @@ int main (int argc, char **argv) {
         if (in != stdin)
                 fclose(in);
 
-        rd_kafka_wait_destroyed(5000);
+        rd_kafka_wait_destroyed(30000);
 
 #if ENABLE_AVRO
         kc_avro_term();
